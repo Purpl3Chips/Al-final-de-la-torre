@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function () {
     const sidewaysContainer = document.getElementById('sideways-container');
     if (!sidewaysContainer) return;
@@ -25,6 +24,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     let currentIndex = 0;
+    let scrollAccumulator = 0; // Acumulador de movimiento
+    const scrollThreshold = 150; // Sensibilidad: Aumenta este número para hacerlo más lento
 
     // Función para mostrar un panel específico
     function showPanel(index) {
@@ -35,12 +36,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Detectar scroll lateral
     window.addEventListener('wheel', function (e) {
-        // Verificar si estamos viendo el contenedor sideways (al final de la página o visible en viewport)
+        // Verificar si estamos viendo el contenedor sideways
         const rect = sidewaysContainer.getBoundingClientRect();
         const isVisible = (rect.top < window.innerHeight && rect.bottom >= 0);
 
         if (isVisible && Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-            if (e.deltaX > 0) {
+            e.preventDefault(); // Evita gestos nativos del navegador
+
+            scrollAccumulator += e.deltaX; // Sumamos el movimiento
+
+            // Solo cambiamos si superamos el umbral
+            if (scrollAccumulator > scrollThreshold) {
                 // Derecha -> Siguiente panel
                 if (currentIndex < sidewaysPanels.length - 1) {
                     currentIndex++;
@@ -49,15 +55,63 @@ document.addEventListener('DOMContentLoaded', function () {
                     currentIndex = 0; // Loop al inicio
                     showPanel(currentIndex);
                 }
-            } else if (e.deltaX < 0) {
+                scrollAccumulator = 0; // Reiniciamos la cuenta
+            } else if (scrollAccumulator < -scrollThreshold) {
                 // Izquierda -> Panel anterior
                 if (currentIndex > 0) {
                     currentIndex--;
                     showPanel(currentIndex);
                 }
+                scrollAccumulator = 0; // Reiniciamos la cuenta
             }
+        } else {
+            // Si el usuario hace scroll vertical, reseteamos el acumulador para evitar cambios accidentales
+            scrollAccumulator = 0;
         }
-    });
+    }, { passive: false }); // Necesario para usar preventDefault
+
+    // Lógica para Gota y Splash
+    const waterEffect = document.getElementById('water-effect');
+    
+    // Ajusta estos valores según necesites
+    // Usamos porcentajes de la altura total del documento para definir los puntos
+    function updateWaterEffect() {
+        if (!waterEffect) return;
+
+        const totalHeight = document.documentElement.scrollHeight;
+        const startPoint = totalHeight * 0.15; // Aparece al 15% del scroll
+        const splashPoint = totalHeight * 0.70; // Splash al 80% del scroll
+        const scrollY = window.scrollY;
+
+        if (scrollY < startPoint) {
+            // Aún no aparece
+            waterEffect.style.display = 'none';
+        } else if (scrollY >= startPoint && scrollY < splashPoint) {
+            // Modo Gota: Sigue la pantalla (Fixed)
+            waterEffect.src = 'gota.png';
+            waterEffect.style.display = 'block';
+            waterEffect.style.position = 'fixed';
+            waterEffect.style.top = '50%';
+            waterEffect.style.left = '50%';
+            waterEffect.style.transform = 'translate(-50%, -50%)';
+            waterEffect.style.right = 'auto'; // Reset right
+        } else {
+            // Modo Splash: Se queda pegado (Absolute)
+            waterEffect.src = 'splash.png';
+            waterEffect.style.display = 'block';
+            waterEffect.style.position = 'absolute';
+            // Se queda en la posición exacta donde ocurrió el cambio
+            // Calculamos la posición absoluta basada en el scroll donde ocurre el splash + la mitad del viewport
+            waterEffect.style.top = (splashPoint + (window.innerHeight / 2)) + 'px';
+            waterEffect.style.left = '50%';
+            waterEffect.style.transform = 'translate(-50%, -50%)';
+            waterEffect.style.right = 'auto';
+        }
+    }
+
+    window.addEventListener('scroll', updateWaterEffect);
+    // Llamar una vez al inicio para establecer estado correcto
+    updateWaterEffect();
 });
 
 
