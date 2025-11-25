@@ -1,0 +1,20 @@
+
+body {
+	background: #222;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	margin: 0;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    -webkit-scrollbar {
+    display: none;
+}
+}
+
+.webtoon-panel img {
+	max-width: 100%;
+	
+}
+
