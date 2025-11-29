@@ -15,7 +15,11 @@ body {
 
 .webtoon-panel img {
 	max-width: 100%;
-	
+	display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
 }
 
 #water-effect {
@@ -26,5 +30,112 @@ body {
     z-index: 10000;
     display: none; /* Oculto inicialmente */
     pointer-events: none; /* Para que no interfiera con el click/scroll */
+}
+
+/* Cada hoja del cómic */
+.page {
+    position: relative;      /* Clave: referencia para los diálogos */
+}
+
+/* Imagen grande de la hoja del cómic */
+.imgpanel {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+/* Diálogo pequeño sobre la hoja */
+.dialogue {
+    position: absolute;
+    width: 40%;              /* Ajusta el tamaño del globito (ej. 30%, 50%, etc.) */
+    left: 0%;               /* Distancia desde la izquierda (en % de la hoja) */
+    top: 40%;                /* Altura dentro de la hoja (en % de la altura) */
+    transform: translateY(-50%);  /* Para centrarlo verticalmente respecto a ese “top” */
+    pointer-events: none;    /* Para que no estorbe clics/scroll */
+
+    opacity: 0;              /* Empiezan invisibles */
+    transition: opacity 0.2s linear;
+}
+
+.dialogo1 {
+    top: 92.5%;
+    left: 0%;
+}
+
+.dialogo2 {
+    top: 12.5%;
+    left: 0%;
+}
+
+.dialogo3 {
+    top: 37.5%;
+    left: 0%;
+}
+
+.dialogo4 {
+    top: 58.2%;
+    left: 0%;
+}
+
+.dialogo5 {
+    top: 27%;
+    left: 0%;
+}
+
+.dialogo6 {
+    top: 38%;
+    left: 0%;
+}
+
+.dialogo7 {
+    top: 42.6%;
+    left: 0%;
+}
+
+.dialogo8 {
+    top: 46.5%;
+    left: 0%;
+}
+
+.dialogo9 {
+    top: 49.8%;
+    left: 0%;
+}
+
+.dialogo10 {
+    top: 55.6%;
+    left: 0%;
+}
+
+.dialogo11 {
+    top: 62.8%;
+    left: 0%;
+}
+
+.dialogo12 {
+    top: 72.2%;
+    left: 0%;
+}
+
+.dialogo13 {
+    top: 80.3%;
+    left: 0%;
+}
+
+.dialogo14 {
+    top: 84.4%;
+    left: 0%;
+}
+
+.dialogo15 {
+    top: 0%;
+    left: 0%;
+}
+
+.dialogo16 {
+    top: 0%;
+    left: 0%;
 }
 
