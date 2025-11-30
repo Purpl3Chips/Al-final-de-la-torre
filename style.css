@@ -158,3 +158,19 @@ body {
     top: 79.8%;
     left: 0%;
 }
+
+#sideways-container {
+    display: flex;
+    overflow-x: auto;          /* scroll horizontal */
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch; /* suavidad en iOS */
+}
+
+.sideways-panel {
+    flex: 0 0 100%;            /* cada imagen ocupa todo el ancho */
+    width: 100%;
+    height: auto;
+    scroll-snap-align: start;  /* hace "click" en cada panel */
+    display: block;
+}
+
