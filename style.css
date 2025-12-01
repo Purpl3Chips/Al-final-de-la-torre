@@ -26,7 +26,7 @@ body {
     position: fixed;
     top: 20px;
     right: 20px;
-    width: 80px; /* Ajusta el tamaño según necesites */
+    width: 100%; /* Ajusta el tamaño según necesites */
     z-index: 10000;
     display: none; /* Oculto inicialmente */
     pointer-events: none; /* Para que no interfiera con el click/scroll */
@@ -174,3 +174,19 @@ body {
     display: block;
 }
 
+.locked {
+    display: none;
+}
+
+.locked.unlocked {
+    display: block;
+}
+
+.eyes-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s linear;
+}
