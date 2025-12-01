@@ -30,8 +30,8 @@ function updateWaterEffect() {
     }
 
     // Calculamos puntos de inicio y splash SOLO dentro de la región de agua
-    const startPoint  = firstTop + regionHeight * 0.01;  // 10% dentro de las 3 hojas
-    const splashPoint = firstTop + regionHeight * 0.90;  // 90% dentro de esa región
+    const startPoint  = firstTop + regionHeight * 0.025;  // 10% dentro de las 3 hojas
+    const splashPoint = firstTop + regionHeight * 0.95;  // 90% dentro de esa región
 
     if (scrollY < startPoint) {
         // Aún no aparece la gota
@@ -161,12 +161,12 @@ updateWaterEffect();
         closed.style.opacity = 0;   // la 3 empieza apagada
 
         // 0 → 0.33 = solo abiertos (base)
-        if (progress < 0.33) {
+        if (progress < 0.50) {
             // no hacemos nada, la base ya está visible
         }
 
         // 0.33 → 0.66 = aparece la capa 2 SOBRE la capa 1
-        else if (progress < 0.66) {
+        else if (progress < 0.58) {
             half.style.opacity = 1;        // aparece la intermedia
             // La base se sigue viendo debajo
         }
