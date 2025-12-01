@@ -39,7 +39,7 @@ function updateWaterEffect() {
 
     } else if (scrollY >= startPoint && scrollY < splashPoint) {
         // Modo Gota: sigue la pantalla (fixed)
-        waterEffect.src = 'Imagenes/gota.png';
+        waterEffect.src = 'Imagenes/gota.webp';
         waterEffect.style.display = 'block';
         waterEffect.style.position = 'fixed';
         waterEffect.style.top = '50%';
@@ -49,7 +49,7 @@ function updateWaterEffect() {
 
     } else {
         // Modo Splash: se queda pegado cerca del final de la zona
-        waterEffect.src = 'Imagenes/splash.png';
+        waterEffect.src = 'Imagenes/splash.webp';
         waterEffect.style.display = 'block';
         waterEffect.style.position = 'absolute';
 
