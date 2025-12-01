@@ -30,8 +30,8 @@ function updateWaterEffect() {
     }
 
     // Calculamos puntos de inicio y splash SOLO dentro de la región de agua
-    const startPoint  = firstTop + regionHeight * 0.025;  // 10% dentro de las 3 hojas
-    const splashPoint = firstTop + regionHeight * 0.95;  // 90% dentro de esa región
+    const startPoint  = firstTop + regionHeight * 0.02;  // 10% dentro de las 3 hojas
+    const splashPoint = firstTop + regionHeight * 0.925;  // 90% dentro de esa región
 
     if (scrollY < startPoint) {
         // Aún no aparece la gota
