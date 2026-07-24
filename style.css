@@ -40,7 +40,7 @@ body{
     position: fixed;
     top: 20px;
     right: 20px;
-    width: 827px; /* Ajusta el tamaño según necesites */
+    width: 350px; /* Ajusta el tamaño según necesites */
     z-index: 10000;
     display: none; /* Oculto inicialmente */
     pointer-events: none; /* Para que no interfiera con el click/scroll */
