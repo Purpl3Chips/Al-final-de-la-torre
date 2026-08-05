@@ -524,4 +524,30 @@ nav a:hover{
 
     }
 
+    header{
+
+        height:85px;
+
+    }
+
+    nav{
+
+    justify-content:space-evenly;
+
+}
+
+nav a{
+
+    padding:14px 0;
+
+    flex:1;
+
+    text-align:center;
+
+    font-size:15px;
+
+}
+
+
+
 }

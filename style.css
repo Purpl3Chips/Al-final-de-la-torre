@@ -173,19 +173,42 @@ body{
     left: 0%;
 }
 
-#sideways-container {
-    display: flex;
-    overflow-x: auto;          /* scroll horizontal */
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch; /* suavidad en iOS */
+#sideways-container{
+
+    display:flex;
+
+    overflow-x:auto;
+    overflow-y:hidden;
+
+    position:relative;
+
+    height:100vh;
+
+    scrollbar-width:none;
+    -ms-overflow-style:none;
+
+    cursor:ew-resize;
+
 }
 
-.sideways-panel {
-    flex: 0 0 100%;            /* cada imagen ocupa todo el ancho */
-    width: 100%;
-    height: auto;
-    scroll-snap-align: start;  /* hace "click" en cada panel */
-    display: block;
+#sideways-container::-webkit-scrollbar{
+
+    display:none;
+
+}
+
+
+
+.sideways-panel{
+
+    flex:0 0 auto;
+
+    width:auto !important;
+
+    height:100%;
+
+    max-width:none !important;
+
 }
 
 .locked {
@@ -204,3 +227,79 @@ body{
     opacity: 0;
     transition: opacity 0.2s linear;
 }
+
+.sideways-wrapper{
+
+    position:relative;
+
+    width:100%;
+
+}
+
+.explorar-aviso{
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:1000;
+
+    pointer-events:none;
+
+    color:white;
+
+}
+
+.explorar-aviso span{
+
+    font-size:52px;
+
+    text-shadow:0 0 15px black;
+
+}
+
+.explorar-aviso p{
+
+    margin-top:15px;
+
+    font-size:24px;
+
+    font-weight:bold;
+
+    text-shadow:
+        0 0 8px black,
+        0 0 18px black,
+        0 0 28px black;
+
+}
+
+@keyframes explorar{
+
+    0%{
+
+        transform:translateX(-12px);
+
+    }
+
+    50%{
+
+        transform:translateX(12px);
+
+    }
+
+    100%{
+
+        transform:translateX(-12px);
+
+    }
+
+}
+
