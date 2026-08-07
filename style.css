@@ -250,6 +250,8 @@ body{
 
     color:white;
 
+    transition: opacity 0.3s ease;
+
 }
 
 .explorar-aviso span{
@@ -297,3 +299,80 @@ body{
 
 }
 
+/* ==========================================
+   FALLA DE LUZ
+========================================== */
+
+.flicker-page {
+    position: relative;
+    width: 100%;
+}
+
+.flicker-base {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.flicker-dark {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: auto;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    animation: luz-fallando 4s infinite;
+}
+
+
+@keyframes luz-fallando {
+
+    /* Luz completamente normal */
+    0% {
+        opacity: 0;
+    }
+
+    /* Empieza a apagarse */
+    45% {
+        opacity: 0;
+    }
+
+    /* Oscurecimiento gradual */
+    55% {
+        opacity: 0.25;
+    }
+
+    65% {
+        opacity: 0.65;
+    }
+
+    /* Se apaga */
+    72% {
+        opacity: 1;
+    }
+
+    /* Pequeño regreso de la luz */
+    76% {
+        opacity: 0.35;
+    }
+
+    /* Vuelve a fallar */
+    79% {
+        opacity: 0.9;
+    }
+
+    /* Regresa la luz */
+    84% {
+        opacity: 0;
+    }
+
+    /* Se queda iluminado un momento */
+    100% {
+        opacity: 0;
+    }
+}

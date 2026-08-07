@@ -1,80 +1,84 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Lógica para Gota y Splash
-const waterEffect = document.getElementById('water-effect');
-const waterZones = document.querySelectorAll('.water-zone');
 
-function updateWaterEffect() {
-    if (!waterEffect || waterZones.length === 0) return;
+    // ==========================================
+    // GOTA Y SPLASH
+    // ==========================================
 
-    // Primera y última hoja donde vive la gota
-    const firstZone = waterZones[0];
-    const lastZone = waterZones[waterZones.length - 1];
+    const waterEffect = document.getElementById('water-effect');
+    const waterZones = document.querySelectorAll('.water-zone');
 
-    const firstTop = firstZone.offsetTop;                          // inicio de la zona
-    const lastBottom = lastZone.offsetTop + lastZone.offsetHeight; // final de la zona
-    const regionHeight = lastBottom - firstTop;
+    function updateWaterEffect() {
 
-    // Scroll actual de la página
-    const scrollY = window.scrollY;
+        if (!waterEffect || waterZones.length === 0) return;
 
-    // Si aún no llegamos a la zona de agua → no mostrar nada
-    if (scrollY + window.innerHeight < firstTop) {
-        waterEffect.style.display = 'none';
-        return;
+        const firstZone = waterZones[0];
+        const lastZone = waterZones[waterZones.length - 1];
+
+        const firstTop = firstZone.offsetTop;
+        const lastBottom = lastZone.offsetTop + lastZone.offsetHeight;
+        const regionHeight = lastBottom - firstTop;
+
+        const scrollY = window.scrollY;
+
+        if (scrollY + window.innerHeight < firstTop) {
+            waterEffect.style.display = 'none';
+            return;
+        }
+
+        if (scrollY > lastBottom) {
+            waterEffect.style.display = 'none';
+            return;
+        }
+
+        const startPoint = firstTop + regionHeight * 0.02;
+        const splashPoint = firstTop + regionHeight * 0.925;
+
+        if (scrollY < startPoint) {
+
+            waterEffect.style.display = 'none';
+
+        } else if (scrollY >= startPoint && scrollY < splashPoint) {
+
+            waterEffect.src = 'Imagenes/gota.webp';
+            waterEffect.style.display = 'block';
+            waterEffect.style.position = 'fixed';
+            waterEffect.style.top = '50%';
+            waterEffect.style.left = '50%';
+            waterEffect.style.transform = 'translate(-50%, -50%)';
+            waterEffect.style.right = 'auto';
+
+        } else {
+
+            waterEffect.src = 'Imagenes/splash.webp';
+            waterEffect.style.display = 'block';
+            waterEffect.style.position = 'absolute';
+
+            waterEffect.style.top =
+                (splashPoint + (window.innerHeight / 2)) + 'px';
+
+            waterEffect.style.left = '50%';
+            waterEffect.style.transform = 'translate(-50%, -50%)';
+            waterEffect.style.right = 'auto';
+        }
     }
 
-    // Si ya pasamos completamente la zona de agua → ocultar
-    if (scrollY > lastBottom) {
-        waterEffect.style.display = 'none';
-        return;
-    }
+    window.addEventListener('scroll', updateWaterEffect);
+    updateWaterEffect();
 
-    // Calculamos puntos de inicio y splash SOLO dentro de la región de agua
-    const startPoint  = firstTop + regionHeight * 0.02;  // 10% dentro de las 3 hojas
-    const splashPoint = firstTop + regionHeight * 0.925;  // 90% dentro de esa región
 
-    if (scrollY < startPoint) {
-        // Aún no aparece la gota
-        waterEffect.style.display = 'none';
-
-    } else if (scrollY >= startPoint && scrollY < splashPoint) {
-        // Modo Gota: sigue la pantalla (fixed)
-        waterEffect.src = 'Imagenes/gota.webp';
-        waterEffect.style.display = 'block';
-        waterEffect.style.position = 'fixed';
-        waterEffect.style.top = '50%';
-        waterEffect.style.left = '50%';
-        waterEffect.style.transform = 'translate(-50%, -50%)';
-        waterEffect.style.right = 'auto';
-
-    } else {
-        // Modo Splash: se queda pegado cerca del final de la zona
-        waterEffect.src = 'Imagenes/splash.webp';
-        waterEffect.style.display = 'block';
-        waterEffect.style.position = 'absolute';
-
-        // Lo dejamos más o menos hacia el final de la región de agua
-        waterEffect.style.top = (splashPoint + (window.innerHeight / 2)) + 'px';
-        waterEffect.style.left = '50%';
-        waterEffect.style.transform = 'translate(-50%, -50%)';
-        waterEffect.style.right = 'auto';
-    }
-}
-
-window.addEventListener('scroll', updateWaterEffect);
-// Llamar una vez al inicio para establecer estado correcto
-updateWaterEffect();
-
+    // ==========================================
+    // DIÁLOGOS
+    // ==========================================
 
     const dialogues = document.querySelectorAll('.dialogue');
 
     function updateDialoguesOpacity() {
+
         const viewportHeight = window.innerHeight;
         const viewportCenter = viewportHeight / 2;
 
         dialogues.forEach(dialogue => {
-            
-            // Si ya desapareció antes, no lo volvemos a mostrar jamás
+
             if (dialogue.dataset.faded === "true") {
                 dialogue.style.opacity = 0;
                 return;
@@ -83,183 +87,254 @@ updateWaterEffect();
             const rect = dialogue.getBoundingClientRect();
             const elementCenter = rect.top + rect.height / 2;
 
-            // Distancia entre el diálogo y el centro de la pantalla
             const distance = elementCenter - viewportCenter;
 
-            /*
-                Queremos:
-                - Cuando distance > 0 (está abajo del centro) → visible
-                - Cuando distance se acerca a 0 → fade a 0
-                - Cuando distance < 0 (pasó el centro) → desaparecer y marcar como "faded"
-            */
-
             if (distance > 0) {
-                // Aún no llega al centro → visible
-                // Fade suave entre "un poco antes" y el centro
-                const fadeStart = viewportHeight * 0.23; // empieza a desvanecer antes
-                let opacity = Math.min(distance / fadeStart, 1);
+
+                const fadeStart = viewportHeight * 0.23;
+
+                let opacity = Math.min(
+                    distance / fadeStart,
+                    1
+                );
+
                 dialogue.style.opacity = opacity;
+
             } else {
-                // Ya pasó el centro → desaparece y queda ahí para siempre
+
                 dialogue.style.opacity = 0;
-                dialogue.dataset.faded = "true"; // marcar como terminado
+                dialogue.dataset.faded = "true";
+
             }
         });
     }
 
     window.addEventListener('scroll', updateDialoguesOpacity);
     window.addEventListener('resize', updateDialoguesOpacity);
+
     updateDialoguesOpacity();
 
-        // ==== DESBLOQUEAR CONTENIDO DESPUÉS DEL CONTENEDOR HORIZONTAL ====
 
-    const sidewaysContainer = document.getElementById('sideways-container');
-    const afterSideways = document.getElementById('after-sideways');
+    // ==========================================
+    // PANEL HORIZONTAL
+    // ==========================================
+
+    const sidewaysContainer =
+        document.getElementById('sideways-container');
+
+    const afterSideways =
+        document.getElementById('after-sideways');
+
+    const explorarAviso =
+        document.querySelector('.explorar-aviso');
+
     let hasUnlockedAfterSideways = false;
 
-    if (sidewaysContainer && afterSideways) {
-        function checkSidewaysScroll() {
-            const maxScrollLeft = sidewaysContainer.scrollWidth - sidewaysContainer.clientWidth;
-            const currentScrollLeft = sidewaysContainer.scrollLeft;
 
-            // pequeña tolerancia por si no llega al pixel exacto
-            if (!hasUnlockedAfterSideways && currentScrollLeft >= maxScrollLeft - 10) {
+    // ==========================================
+    // DESAPARECER AVISO AL MOVER EL PANEL
+    // ==========================================
+
+    if (sidewaysContainer && explorarAviso) {
+
+        sidewaysContainer.addEventListener('scroll', function () {
+
+            explorarAviso.style.opacity = '0';
+
+            setTimeout(function () {
+                explorarAviso.style.display = 'none';
+            }, 300);
+
+        }, { once: true });
+
+    }
+
+
+    // ==========================================
+    // DESBLOQUEAR CONTENIDO DESPUÉS DEL PANEL
+    // ==========================================
+
+    if (sidewaysContainer && afterSideways) {
+
+        function checkSidewaysScroll() {
+
+            const maxScrollLeft =
+                sidewaysContainer.scrollWidth -
+                sidewaysContainer.clientWidth;
+
+            const currentScrollLeft =
+                sidewaysContainer.scrollLeft;
+
+            if (
+                !hasUnlockedAfterSideways &&
+                currentScrollLeft >= maxScrollLeft - 10
+            ) {
+
                 hasUnlockedAfterSideways = true;
-                afterSideways.classList.add('unlocked');  // locked + unlocked => se muestra
+
+                afterSideways.classList.add('unlocked');
             }
         }
 
-        // Se ejecuta cada vez que el usuario hace scroll horizontal en el contenedor
-        sidewaysContainer.addEventListener('scroll', checkSidewaysScroll);
+        sidewaysContainer.addEventListener(
+            'scroll',
+            checkSidewaysScroll
+        );
     }
 
-        // ==== ANIMACIÓN DE OJOS CON SCROLL ====
 
-    const eyesSections = document.querySelectorAll('.eyes-page');
+    // ==========================================
+    // CÁMARA CON EL MOUSE
+    // ==========================================
+
+    if (sidewaysContainer) {
+
+        let mouseX = 0;
+        let animando = false;
+
+        sidewaysContainer.addEventListener(
+            'mousemove',
+            function (event) {
+
+                const rect =
+                    sidewaysContainer.getBoundingClientRect();
+
+                // Posición del mouse dentro del panel
+                mouseX =
+                    (event.clientX - rect.left) /
+                    rect.width;
+
+                // Mantener entre 0 y 1
+                mouseX =
+                    Math.max(0, Math.min(1, mouseX));
+
+                if (!animando) {
+
+                    animando = true;
+
+                    moverCamara();
+                }
+            }
+        );
+
+
+        function moverCamara() {
+
+            const zona = 0.25;
+
+            let velocidad = 0;
+
+
+            // Mouse cerca del borde izquierdo
+            if (mouseX < zona) {
+
+                velocidad =
+                    -((zona - mouseX) / zona) * 12;
+            }
+
+
+            // Mouse cerca del borde derecho
+            else if (mouseX > 1 - zona) {
+
+                velocidad =
+                    ((mouseX - (1 - zona)) / zona) * 12;
+            }
+
+
+            sidewaysContainer.scrollLeft += velocidad;
+
+
+            if (velocidad !== 0) {
+
+                requestAnimationFrame(moverCamara);
+
+            } else {
+
+                animando = false;
+            }
+        }
+    }
+
+
+    // ==========================================
+    // ANIMACIÓN DE OJOS
+    // ==========================================
+
+    const eyesSections =
+        document.querySelectorAll('.eyes-page');
 
     function updateEyesPanels() {
-    const viewportHeight = window.innerHeight;
 
-    eyesSections.forEach(section => {
-        const rect = section.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
 
-        // Progreso del scroll dentro del panel (0 a 1)
-        const total = rect.height + viewportHeight;
-        const passed = viewportHeight - rect.top;
+        eyesSections.forEach(section => {
 
-        let progress = passed / total;
-        if (progress < 0) progress = 0;
-        if (progress > 1) progress = 1;
+            const rect =
+                section.getBoundingClientRect();
 
-        const base   = section.querySelector('.eyes-base');    // ojos abiertos
-        const half   = section.querySelector('.eyes-half');    // medio
-        const closed = section.querySelector('.eyes-closed');  // cerrados
+            const total =
+                rect.height + viewportHeight;
 
-        // Siempre iniciamos con todos visibles en 0
-        base.style.opacity = 1;     // la base nunca se apaga
-        half.style.opacity = 0;     // la 2 empieza apagada
-        closed.style.opacity = 0;   // la 3 empieza apagada
+            const passed =
+                viewportHeight - rect.top;
 
-        // 0 → 0.33 = solo abiertos (base)
-        if (progress < 0.50) {
-            // no hacemos nada, la base ya está visible
-        }
+            let progress =
+                passed / total;
 
-        // 0.33 → 0.66 = aparece la capa 2 SOBRE la capa 1
-        else if (progress < 0.58) {
-            half.style.opacity = 1;        // aparece la intermedia
-            // La base se sigue viendo debajo
-        }
-
-        // 0.66 → 1 = aparece la capa 3 SOBRE la capa 2
-        else {
-            half.style.opacity = 1;        // sigue encendida
-            closed.style.opacity = 1;      // aparece encima
-        }
-    });
-}
+            if (progress < 0) progress = 0;
+            if (progress > 1) progress = 1;
 
 
-    window.addEventListener('scroll', updateEyesPanels);
-    window.addEventListener('resize', updateEyesPanels);
-    updateEyesPanels();
+            const base =
+                section.querySelector('.eyes-base');
+
+            const half =
+                section.querySelector('.eyes-half');
+
+            const closed =
+                section.querySelector('.eyes-closed');
 
 
-});
+            if (!base || !half || !closed) return;
 
-// ==========================================
-// CÁMARA CON EL MOUSE - PANEL HORIZONTAL
-// ==========================================
 
-const sidewaysContainer = document.getElementById("sideways-container");
-const explorarAviso = document.querySelector(".explorar-aviso");
+            base.style.opacity = 1;
+            half.style.opacity = 0;
+            closed.style.opacity = 0;
 
-if (sidewaysContainer) {
 
-    let mouseX = 0;
-    let animando = false;
+            if (progress < 0.50) {
 
-    sidewaysContainer.addEventListener("mousemove", function(event) {
+                // Solo ojos abiertos
 
-        // El aviso desaparece al mover el mouse
-        if (explorarAviso) {
-            explorarAviso.style.opacity = "0";
-        }
+            } else if (progress < 0.58) {
 
-        const rect = sidewaysContainer.getBoundingClientRect();
+                // Ojos entrecerrados
+                half.style.opacity = 1;
 
-        // Posición del mouse dentro del panel (0 = izquierda, 1 = derecha)
-        mouseX = (event.clientX - rect.left) / rect.width;
+            } else {
 
-        // Mantener el valor entre 0 y 1
-        mouseX = Math.max(0, Math.min(1, mouseX));
+                // Ojos cerrados
+                half.style.opacity = 1;
+                closed.style.opacity = 1;
+            }
 
-        if (!animando) {
-            animando = true;
-            moverCamara();
-        }
-
-    });
-
-    function moverCamara() {
-
-        // Qué tan cerca está el mouse de los bordes
-        const zona = 0.25;
-
-        let velocidad = 0;
-
-        // Mouse cerca del borde izquierdo
-        if (mouseX < zona) {
-
-            velocidad = -((zona - mouseX) / zona) * 12;
-
-        }
-
-        // Mouse cerca del borde derecho
-        else if (mouseX > 1 - zona) {
-
-            velocidad = ((mouseX - (1 - zona)) / zona) * 12;
-
-        }
-
-        sidewaysContainer.scrollLeft += velocidad;
-
-        // Mientras haya movimiento, seguimos comprobando
-        if (velocidad !== 0) {
-
-            requestAnimationFrame(moverCamara);
-
-        } else {
-
-            animando = false;
-
-        }
-
+        });
     }
 
-}
+    window.addEventListener(
+        'scroll',
+        updateEyesPanels
+    );
 
+    window.addEventListener(
+        'resize',
+        updateEyesPanels
+    );
 
+    updateEyesPanels();
+
+});
 
 
 
