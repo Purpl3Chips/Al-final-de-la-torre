@@ -175,19 +175,11 @@ body{
 
 #sideways-container{
 
-    display:flex;
-
     overflow-x:auto;
     overflow-y:hidden;
 
-    position:relative;
-
     height:100vh;
-
-    scrollbar-width:none;
-    -ms-overflow-style:none;
-
-    cursor:ew-resize;
+    white-space:nowrap;
 
 }
 
@@ -201,13 +193,13 @@ body{
 
 .sideways-panel{
 
-    flex:0 0 auto;
-
-    width:auto !important;
+    display:block;
 
     height:100%;
 
-    max-width:none !important;
+    width:auto;
+
+    max-width:none;
 
 }
 
