@@ -187,6 +187,78 @@ updateWaterEffect();
 
 });
 
+// ==========================================
+// CÁMARA CON EL MOUSE - PANEL HORIZONTAL
+// ==========================================
+
+const sidewaysContainer = document.getElementById("sideways-container");
+const explorarAviso = document.querySelector(".explorar-aviso");
+
+if (sidewaysContainer) {
+
+    let mouseX = 0;
+    let animando = false;
+
+    sidewaysContainer.addEventListener("mousemove", function(event) {
+
+        // El aviso desaparece al mover el mouse
+        if (explorarAviso) {
+            explorarAviso.style.opacity = "0";
+        }
+
+        const rect = sidewaysContainer.getBoundingClientRect();
+
+        // Posición del mouse dentro del panel (0 = izquierda, 1 = derecha)
+        mouseX = (event.clientX - rect.left) / rect.width;
+
+        // Mantener el valor entre 0 y 1
+        mouseX = Math.max(0, Math.min(1, mouseX));
+
+        if (!animando) {
+            animando = true;
+            moverCamara();
+        }
+
+    });
+
+    function moverCamara() {
+
+        // Qué tan cerca está el mouse de los bordes
+        const zona = 0.25;
+
+        let velocidad = 0;
+
+        // Mouse cerca del borde izquierdo
+        if (mouseX < zona) {
+
+            velocidad = -((zona - mouseX) / zona) * 12;
+
+        }
+
+        // Mouse cerca del borde derecho
+        else if (mouseX > 1 - zona) {
+
+            velocidad = ((mouseX - (1 - zona)) / zona) * 12;
+
+        }
+
+        sidewaysContainer.scrollLeft += velocidad;
+
+        // Mientras haya movimiento, seguimos comprobando
+        if (velocidad !== 0) {
+
+            requestAnimationFrame(moverCamara);
+
+        } else {
+
+            animando = false;
+
+        }
+
+    }
+
+}
+
 
 
 

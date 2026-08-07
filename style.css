@@ -181,6 +181,8 @@ body{
     height:100vh;
     white-space:nowrap;
 
+    cursor: ew-resize;
+
 }
 
 #sideways-container::-webkit-scrollbar{
@@ -191,7 +193,7 @@ body{
 
 
 
-.sideways-panel{
+.webtoon-panel .sideways-panel{
 
     display:block;
 
