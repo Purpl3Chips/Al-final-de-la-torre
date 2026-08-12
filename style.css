@@ -478,9 +478,15 @@ body{
 }
 
 .autores-intro p {
+    text-indent: 30px;
+    text-align: justify;
     font-size: 18px;
     line-height: 1.6;
     color: #d6d6d6;
+}
+
+.autores-intro p + p {
+    margin-top: 30px;
 }
 
 
@@ -574,6 +580,10 @@ body{
     line-height: 1.7;
 
     text-align: left;
+}
+
+.autor-experiencia + .autor-experiencia {
+    margin-top: 30px;
 }
 
 
