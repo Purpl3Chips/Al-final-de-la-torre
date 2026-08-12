@@ -74,6 +74,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function updateDialoguesOpacity() {
 
+
+        // ==========================================
+    // lo de hasta arriba es el dialogo que aparece en lugar de desaparecer
+    // ==========================================
+        const appearingDialogues = document.querySelectorAll('.dialogue-aparece');
+
         const viewportHeight = window.innerHeight;
         const viewportCenter = viewportHeight / 2;
 
@@ -107,6 +113,37 @@ document.addEventListener('DOMContentLoaded', function () {
 
             }
         });
+
+
+        // ==========================================
+    // dialogo que aparece en lugar de desaparecer
+    // ==========================================
+        appearingDialogues.forEach(dialogue => {
+
+            const rect = dialogue.getBoundingClientRect();
+            const elementCenter = rect.top + rect.height / 2;
+
+            // Punto donde empieza a aparecer
+            const fadeStart = window.innerHeight * 0.90;
+
+            // Punto donde ya está completamente visible
+            const fadeEnd = window.innerHeight * 0.60;
+
+            let opacity = (fadeStart - elementCenter) / (fadeStart - fadeEnd);
+
+            opacity = Math.max(0, Math.min(1, opacity));
+
+            dialogue.style.opacity = opacity;
+
+            // Desenfoque especial para la página 64
+            if (dialogue.classList.contains('pag64')) {
+
+                const blur = 10 * (1 - opacity);
+
+                dialogue.style.filter = `blur(${blur}px)`;
+            }
+        });
+
     }
 
     window.addEventListener('scroll', updateDialoguesOpacity);

@@ -173,6 +173,78 @@ body{
     left: 0%;
 }
 
+/* ==========================================
+   SONIDO FUERTE - HOJA 60 y 66
+========================================== */
+
+.sonido-temblor {
+    top: 87%;
+    left: 0%;
+    width: 40%;
+
+    opacity: 1 !important;
+
+    animation: temblor-sonido 0.12s infinite;
+}
+
+.sonido-temblor-66 {
+    top: 82.5%;
+    left: 0%;
+    width: 40%;
+
+    opacity: 1 !important;
+
+    animation: temblor-sonido 0.12s infinite;
+}
+
+@keyframes temblor-sonido {
+
+    0% {
+        transform: translate(-2px, calc(-50% + 1px));
+    }
+
+    25% {
+        transform: translate(2px, calc(-50% - 1px));
+    }
+
+    50% {
+        transform: translate(-1px, calc(-50% - 2px));
+    }
+
+    75% {
+        transform: translate(2px, calc(-50% + 2px));
+    }
+
+    100% {
+        transform: translate(-2px, calc(-50% + 1px));
+    }
+
+}
+/* ==========================================
+   SONIDO FUERTE - HOJA 60 aqui acaba
+========================================== */
+
+/* ==========================================
+   dialogo aparece - HOJA 63
+========================================== */
+
+.dialogue-aparece {
+    top: 90%;
+    left: 0%;
+    opacity: 0;
+    transition: opacity 0.5s linear;
+}
+
+/* ==========================================
+   dialogo aparece blurreado - HOJA 64
+========================================== */
+
+.pag64 {
+    top: 10%;
+    filter: blur(10px);
+    transition: opacity 0.5s linear, filter 0.5s linear;
+}
+
 #sideways-container{
 
     overflow-x:auto;
@@ -375,4 +447,194 @@ body{
     100% {
         opacity: 0;
     }
+}
+
+/* ==========================================
+   PÁGINA DE AUTORES
+========================================== */
+
+.autores {
+    color: white;
+    padding-bottom: 100px;
+}
+
+.autores-intro {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 70px 20px 50px;
+}
+
+.autores-intro h1 {
+    font-size: 56px;
+    margin-bottom: 10px;
+}
+
+.autores-intro h2 {
+    font-size: 26px;
+    font-weight: normal;
+    color: #cfcfcf;
+    margin-bottom: 25px;
+}
+
+.autores-intro p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #d6d6d6;
+}
+
+
+/* TARJETAS */
+
+.autores-grid {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+}
+
+.autor {
+    background: rgba(33, 22, 100, 0.75);
+
+    border-radius: 18px;
+
+    padding: 35px;
+
+    text-align: center;
+
+    box-shadow: 0 15px 35px rgba(0, 0, 0, .25);
+}
+
+
+/* CHIBI */
+
+.autor-chibi {
+    display: block;
+
+    width: 100%;
+    max-width: 280px;
+
+    height: auto;
+
+    margin: 0 auto 20px;
+}
+
+
+/* NOMBRE */
+
+.autor h2 {
+    font-size: 34px;
+    margin-bottom: 8px;
+}
+
+
+/* ROL */
+
+.autor-rol {
+    color: #cfcfcf;
+
+    font-size: 17px;
+    font-weight: bold;
+
+    margin-bottom: 12px;
+}
+
+
+/* INSTAGRAM */
+
+.autor-instagram {
+    display: inline-block;
+
+    color: #b99cff;
+
+    text-decoration: none;
+
+    font-size: 16px;
+
+    margin-bottom: 25px;
+
+    transition: .2s;
+}
+
+.autor-instagram:hover {
+    color: white;
+    transform: translateY(-2px);
+}
+
+
+/* EXPERIENCIA */
+
+.autor-experiencia {
+    color: #d6d6d6;
+
+    font-size: 17px;
+    line-height: 1.7;
+
+    text-align: left;
+}
+
+
+/* FINAL */
+
+.autores-final {
+    text-align: center;
+
+    max-width: 650px;
+
+    margin: 80px auto 0;
+
+    padding: 40px 20px;
+}
+
+.autores-final h2 {
+    font-size: 38px;
+    margin-bottom: 20px;
+}
+
+.autores-final p {
+    color: #d6d6d6;
+
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.autores-final .firma {
+    margin-top: 25px;
+    color: #b99cff;
+}
+
+@media (max-width: 768px) {
+
+    .autores-intro {
+        padding-top: 50px;
+    }
+
+    .autores-intro h1 {
+        font-size: 42px;
+    }
+
+    .autores-intro h2 {
+        font-size: 22px;
+    }
+
+    .autores-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .autor {
+        padding: 25px 20px;
+    }
+
+    .autor-chibi {
+        max-width: 240px;
+    }
+
+    .autor h2 {
+        font-size: 30px;
+    }
+
 }
