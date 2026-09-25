@@ -72,12 +72,13 @@ nav a{
     font-size:20px;
 
     transition:0.3s;
-
+     transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 nav a:hover{
 
-    background:#080521;
+    background:#b6a403bf;
+    transform: scale(1.05);
 
 }
 
@@ -500,6 +501,10 @@ nav a:hover{
 
 @media (max-width: 768px){
 
+    .hero-texto h1{
+         font-size: 34px;
+
+    }
     .capitulo{
 
         flex-direction: column;
