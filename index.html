@@ -7,6 +7,9 @@
     <title>Al Final de la Torre</title>
 
     <link rel="stylesheet" href="inicio.css">
+    <link rel="stylesheet" href="background.css">
+    <link rel="stylesheet" href="footer.css">
+
 </head>
 
 <body>
@@ -19,7 +22,7 @@
 
     <nav>
 
-        <a href="index.html">Inicio</a>
+        <a href="index.html" id="button">Inicio</a>
 
         <a href="leer.html">Leer</a>
 
@@ -28,53 +31,67 @@
     </nav>
 
     <main>
+        <section class="hero">
 
-    <main>
+            <div class="hero-imagen">
+                <!-- Esto de aquí es la imagen que hicimos para la galería-->
 
-    <section class="hero">
-        
+                <img src="Imagenes/al final de la torre promo.png"
+                     alt="Imagen promocional de Al Final de la Torre"
+                     class="promo-img">
 
-         <div class="hero-imagen"> 
-            <!-- Esto de aquí es la imagen que hicimos para la galería-->
+            </div>
 
-            <img src="Imagenes/al final de la torre promo.png"
-                 alt="Imagen promocional de Al Final de la Torre"
-                 class="promo-img">
+            <div class="hero-texto">
 
+                <h1>Al Final de la Torre</h1>
+
+                <p class="sinopsis">
+                    Ezrah ha vivido en completa soledad desde la evacuación masiva de la nave en la que vive,
+                    jamás ha tenido la necesidad de salir de su hogar pues tiene suficientes provisiones para
+                    lo que resta de su vida, o es así hasta que una voz comienza a hablarle desde la ventilación
+                    y le hace darse cuenta de que tal vez, muy en el fondo, anhela una conexión genuina.
+                </p>
+
+                <p class="sinopsis">
+                    Al final de la torre es una historia sobre atreverse a salir de tu zona de confort para
+                    abrir las puertas a nuevas oportunidades de encontrar la felicidad en un mejor lugar.
+
+                </p>
+
+                <a href="leer.html" class="boton-principal">
+                   ✦ Entrar a la Torre ✦
+                </a>
+
+            </div>
+
+
+        </section>
+    </main>
+
+    <footer class="contact-area" id="contact">
+        <div class="container">
+            <div class="contact-content text-center">
+                <p>Contacto y redes</p>
+                <div class="hr"></div>
+                <h6>Al Final de la Torre</h6>
+                <h6>Mail us ! : <span>| place holder mail</span></h6>
+                <div class="contact-social">
+                    <ul>
+                        <li><a class="hover-target" href="alex aca va el link a facebook" aria-label="Facebook"><img src="icons/icons8-facebook-48.png" alt="Facebook"></a></li>
+                        <li><a class="hover-target" href="alex aca va el link a ig" aria-label="Instagram"><img src="icons/icons8-instagram-48.png" alt="Instagram"></a></li>
+                        <li><a class="hover-target" href="alex aca va el link a tw" aria-label="Twitter"><img src="icons/icons8-twitter-bird-24.png" alt="Twitter"></a></li>
+                        <li><a class="hover-target" href="alex aca va el link a tubmlr" aria-label="Tumblr"><img src="icons/tumblr-116_16.png" alt="Tumblr"></a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
+    </footer>
 
-        <div class="hero-texto">
-
-            <h1>Al Final de la Torre</h1>
-
-            <p class="sinopsis">
-                Ezrah ha vivido en completa soledad desde la evacuación masiva de la nave en la que vive, 
-                jamás ha tenido la necesidad de salir de su hogar pues tiene suficientes provisiones para 
-                lo que resta de su vida, o es así hasta que una voz comienza a hablarle desde la ventilación 
-                y le hace darse cuenta de que tal vez, muy en el fondo, anhela una conexión genuina. 
-                
-                
-            </p>
-
-            <p class="sinopsis">
-                Al final de la torre es una historia sobre atreverse a salir de tu zona de confort para 
-                abrir las puertas a nuevas oportunidades de encontrar la felicidad en un mejor lugar.
-
-            </p>
-            
-
-            <a href="leer.html" class="boton-principal">
-               ✦ Entrar a la Torre ✦
-            </a>
-
-        </div>
-
-
-    </section>
-
-
-</main>
+    <script src="background.js"></script>
 
 </body>
+
+
 
 </html>
