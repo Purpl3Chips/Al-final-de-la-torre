@@ -1,12 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TFSPEQJPN0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TFSPEQJPN0');
+</script>
+
+<link rel="icon" type="image/png" href="favicon.png">
+    <!-- el icono de la pagina -->
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Webtoon Panel</title>
+    <title>Capítulo 1 | Al Final de la Torre</title>
 
     <link rel="stylesheet" href="inicio.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="background.css">
+    <link rel="stylesheet" href="footer.css">
 
 </head>
 <body>
@@ -46,11 +61,15 @@
 
         <a href="leer.html">← Salir de la torre</a>
 
+        <a href="#" class="deshabilitado">Piso IV →</a>
+
+        <!-- <a href="capitulo2.html" >Piso IV →</a>
+
+        Cuando ese capitulo SE HABILITA se cambia href="#" por href="capitulo2.html" -->
+
         
 
-        <a href="capitulo2.html" >Piso IV →</a>
-
-         <!-- Cuando ese capitulo exista se cambia href="#" por href="capitulo2.html" -->
+        
 
     </div>
 
@@ -185,7 +204,15 @@
 
         <a href="leer.html">← Salir de la torre</a>
 
-        <a href="capitulo2.html" >Piso IV →</a>
+        <a href="#" class="deshabilitado">Piso IV →</a>
+
+        <!-- <a href="capitulo2.html" >Piso IV →</a>
+
+        Cuando ese capitulo SE HABILITA se cambia href="#" por href="capitulo2.html" -->
+
+        
+
+        
 
     </div>
 
@@ -193,7 +220,27 @@
 
     </main>
 
+    <footer class="contact-area" id="contact">
+        <div class="container">
+            <div class="contact-content text-center">
+                <p>Contacto y redes</p>
+                <div class="hr"></div>
+                <h6>Al Final de la Torre</h6>
+                <h6>Contáctanos:<span>alfinaldelatorre@gmail.com </span></h6>
+                <div class="contact-social">
+                    <ul>
+                         <li><a class="hover-target" href="https://www.facebook.com/share/1JLvo2CpCx/?mibextid=wwXIfr" aria-label="Facebook"><img src="icons/icons8-facebook-48.png" alt="Facebook"></a></li>
+                        <li><a class="hover-target" href="https://www.instagram.com/alfinaldelatorrecomic/" aria-label="Instagram"><img src="icons/icons8-instagram-48.png" alt="Instagram"></a></li>
+                        <li><a class="hover-target" href="https://www.tiktok.com/@alfinaldelatorrecomic?_r=1&_t=ZS-9ABIJiAjRCy" aria-label="Twitter"><img src="icons/icon-tiktok.png" alt="Twitter"></a></li>
+                        <li><a class="hover-target" href="https://www.tumblr.com/alfinaldelatorrecomic?source=share" aria-label="Tumblr"><img src="icons/tumblr-116_16.png" alt="Tumblr"></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
     <script src="script.js"></script>
+    <script src="background.js"></script>
 
 </body>
 
